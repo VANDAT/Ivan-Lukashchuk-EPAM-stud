@@ -1,0 +1,10 @@
+package com.epam.stud.classloader;
+
+public class Runner {
+	public static void main(String[] args) {
+		TestModule t = new TestModule();
+		while (true) {
+			System.out.println(t);
+		}
+	}
+}

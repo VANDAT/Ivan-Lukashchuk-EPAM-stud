@@ -1,0 +1,11 @@
+package com.epam.kiev.skipass;
+
+public class DaysSkiPass extends UncountableSkiPass {
+
+	@Override
+	public boolean lift() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

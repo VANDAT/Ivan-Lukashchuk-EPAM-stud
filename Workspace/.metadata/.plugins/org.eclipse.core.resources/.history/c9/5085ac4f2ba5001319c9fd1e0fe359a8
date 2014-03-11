@@ -1,0 +1,16 @@
+package com.epam.stud.classloader;
+
+public class MyClassLoader extends ClassLoader{
+	 String host;
+     int port;
+     
+     @Override
+     public Class findClass(String name) {
+         byte[] b = loadClassData(name);
+         return defineClass(name, b, 0, b.length);
+     }
+     protected byte[] loadClassData(String name) {
+         // load the class data from the connection
+     }
+
+}

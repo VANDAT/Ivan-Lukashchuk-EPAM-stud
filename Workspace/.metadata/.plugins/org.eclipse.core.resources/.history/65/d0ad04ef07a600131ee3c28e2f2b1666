@@ -1,0 +1,41 @@
+package com.epam.stud.classloader;
+
+import java.util.HashMap;
+
+public class Runner {
+	public static void main(String[] args) {
+		 HashMap<String, String> mappings = new HashMap<String, String>();
+		 mappings.put(
+		 "com.epam.stud.classloader.TestModule",
+		 "D:\\Workspace\\ClassLoader\\bin\\com\\epam\\stud\\classloader\\TestModule.class");
+
+		while (true) {
+			ClassLoader cpClassLoader = new CPClassLoader(new String[] { "." });
+			ClassLoader myClassLoader = new MyClassLoader(mappings);
+			try {
+				Class clazz = Class.forName(
+						"com.epam.stud.classloader.TestModule", true,
+						cpClassLoader);				
+				Object t = clazz.newInstance();
+				System.out.println(t);
+				clazz = myClassLoader.loadClass("com.epam.stud.classloader.TestModule");
+				t = clazz.newInstance();
+				System.out.println(t);
+				System.out.println();
+				Thread.sleep(3000);
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+}

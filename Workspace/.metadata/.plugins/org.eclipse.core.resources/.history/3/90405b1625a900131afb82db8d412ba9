@@ -1,0 +1,11 @@
+package com.epam.kiev.skipass;
+
+public class MorningSkiPass extends PartOfDaySkiPass {
+
+	@Override
+	public boolean lift() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

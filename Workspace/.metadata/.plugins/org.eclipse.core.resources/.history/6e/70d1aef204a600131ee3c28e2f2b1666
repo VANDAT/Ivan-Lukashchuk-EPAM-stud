@@ -1,0 +1,10 @@
+package com.epam.stud.classloader;
+
+public class TestModule {
+	static int count;
+
+	@Override
+	public String toString() {
+		return "TestModule, version 8! " + count++;
+	}
+}

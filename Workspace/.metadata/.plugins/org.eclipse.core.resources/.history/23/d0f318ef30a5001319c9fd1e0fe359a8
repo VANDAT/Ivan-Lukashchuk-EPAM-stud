@@ -1,0 +1,19 @@
+package com.epam.stud.classloader;
+
+public class Runner {
+	public static void main(String[] args) {
+
+		while (true) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			MyClassLoader myClassLoader = new MyClassLoader();
+			Class clazz = myClassLoader
+					.loadClass("D:\\Workspace\\ClassLoader\\bin\\com\\epam\\stud\\classloader\\TestModule.class");
+			Object t = new TestModule();
+			System.out.println(t);
+		}
+	}
+}
