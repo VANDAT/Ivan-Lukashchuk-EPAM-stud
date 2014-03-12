@@ -10,6 +10,11 @@ public abstract class UncountableSkiPass extends AbstractSkiPass {
 		activateDate = new Date();
 	}
 	
+	@Override
+	public boolean lift() {		
+		return isValid();
+	}
+	
 	public Date getActivateDate() {
 		return activateDate;
 	}
