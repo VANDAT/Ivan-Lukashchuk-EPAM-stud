@@ -1,9 +1,13 @@
-package com.epam.kiev.skipass;
+package com.epam.kiev.skipass.pass;
 
 public abstract class AbstractSkiPass implements SkiPass{
 
 	private long id;
 	private boolean bloked;
+	
+	public boolean isValid(){
+		return !bloked;
+	}
 	
 	public long getId() {
 		return id;
