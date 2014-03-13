@@ -3,6 +3,10 @@ package com.epam.kiev.skipass.pass;
 public class CountableSkiPass extends AbstractSkiPass {
 
 	private int numberOfLifts;
+	
+	public CountableSkiPass(int numberOfLifts){
+		this.numberOfLifts = numberOfLifts;
+	}
 
 	public int getNumberOfLifts() {
 		return numberOfLifts;
