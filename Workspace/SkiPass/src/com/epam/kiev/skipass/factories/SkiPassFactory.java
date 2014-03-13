@@ -1,6 +1,6 @@
-package com.epam.kiev.skipass;
+package com.epam.kiev.skipass.factories;
 
-import com.epam.kiev.skipass.pass.SkiPass;
+import com.epam.kiev.skipass.factories.cards.SkiPass;
 
 public interface SkiPassFactory {
 	
@@ -9,5 +9,5 @@ public interface SkiPassFactory {
 	
 	SkiPass letOutCountSkiPass(int numberOfLifts);
 	SkiPass letOutDaysSkiPass(int numberOfDays);
-	SkiPass lrtOutPartOfDaySkiPass(int partOfDay);
+	SkiPass letOutPartOfDaySkiPass(int partOfDay);
 }

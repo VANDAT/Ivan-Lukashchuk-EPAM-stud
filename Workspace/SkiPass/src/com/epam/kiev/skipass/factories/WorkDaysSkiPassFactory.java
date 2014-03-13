@@ -1,11 +1,11 @@
-package com.epam.kiev.skipass;
+package com.epam.kiev.skipass.factories;
 
-import com.epam.kiev.skipass.pass.CountableSkiPass;
-import com.epam.kiev.skipass.pass.DaysSkiPass;
-import com.epam.kiev.skipass.pass.EveningSkiPass;
-import com.epam.kiev.skipass.pass.MorningSkiPass;
-import com.epam.kiev.skipass.pass.SkiPass;
-import com.epam.kiev.skipass.pass.weekdays.WorkDaysWrapper;
+import com.epam.kiev.skipass.factories.cards.CountableSkiPass;
+import com.epam.kiev.skipass.factories.cards.DaysSkiPass;
+import com.epam.kiev.skipass.factories.cards.EveningSkiPass;
+import com.epam.kiev.skipass.factories.cards.MorningSkiPass;
+import com.epam.kiev.skipass.factories.cards.SkiPass;
+import com.epam.kiev.skipass.factories.cards.weekdays.WorkDaysWrapper;
 
 public class WorkDaysSkiPassFactory implements SkiPassFactory{
 	
@@ -20,7 +20,7 @@ public class WorkDaysSkiPassFactory implements SkiPassFactory{
 	}
 
 	@Override
-	public SkiPass lrtOutPartOfDaySkiPass(int partOfDay) {
+	public SkiPass letOutPartOfDaySkiPass(int partOfDay) {
 		switch (partOfDay) {
 		case SkiPassFactory.MORNING:
 			return new WorkDaysWrapper(new MorningSkiPass());

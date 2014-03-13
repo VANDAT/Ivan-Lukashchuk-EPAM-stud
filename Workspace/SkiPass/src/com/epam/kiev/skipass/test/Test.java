@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.epam.kiev.skipass.SkiPassAbstractFactory;
-import com.epam.kiev.skipass.pass.SkiPass;
+import com.epam.kiev.skipass.factories.SkiPassAbstractFactory;
+import com.epam.kiev.skipass.factories.cards.SkiPass;
 
 public class Test {
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class Test {
 				
 		SkiPass skiPass = SkiPassAbstractFactory.getSkiPassFactory(
 				SkiPassAbstractFactory.WORK_DAYS_TYPE)
-				.lrtOutPartOfDaySkiPass(1);		
+				.letOutPartOfDaySkiPass(1);		
 		System.out.println(skiPass.lift());
 		System.out.println(skiPass);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();		

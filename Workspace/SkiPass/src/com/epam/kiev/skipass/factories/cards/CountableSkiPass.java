@@ -1,7 +1,13 @@
-package com.epam.kiev.skipass.pass;
+package com.epam.kiev.skipass.factories.cards;
+
+import com.epam.kiev.skipass.adminapi.History;
 
 public class CountableSkiPass extends AbstractSkiPass {
 
+	private static final long serialVersionUID = 585572936638396944L;
+	
+	private static History history = new History(CountableSkiPass.class);
+	
 	private int numberOfLifts;
 	
 	public CountableSkiPass(int numberOfLifts){
@@ -17,12 +23,12 @@ public class CountableSkiPass extends AbstractSkiPass {
 	}
 
 	@Override
-	public boolean lift() {
-		if (isValid()) {
+	public boolean lift() {		
+		boolean isValid = super.lift();		
+		if (isValid) {
 			numberOfLifts--;
-			return true;
 		}
-		return false;
+		return isValid;
 	}
 
 	@Override
@@ -30,4 +36,8 @@ public class CountableSkiPass extends AbstractSkiPass {
 		return (super.isValid()) && (numberOfLifts > 0);
 	}
 
+	@Override
+	protected void historyCount(boolean isValid) {
+		history.count(isValid);
+	}
 }

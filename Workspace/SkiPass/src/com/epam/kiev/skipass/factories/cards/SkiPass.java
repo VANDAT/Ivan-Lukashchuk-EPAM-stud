@@ -1,4 +1,4 @@
-package com.epam.kiev.skipass.pass;
+package com.epam.kiev.skipass.factories.cards;
 
 import java.io.Serializable;
 
