@@ -6,7 +6,7 @@ import java.util.Date;
 public class DaysSkiPass extends UncountableSkiPass {
 
 	private int numberOfDays;
-
+	
 	public DaysSkiPass(int numberOfDays) {
 		this.numberOfDays = numberOfDays;
 	}

@@ -22,4 +22,12 @@ public abstract class PartOfDaySkiPass extends UncountableSkiPass {
 	public boolean isValid() {
 		return super.isValid() && validFrom.before(new Date());
 	}
+
+	@Override
+	public String toString() {
+		return "PartOfDaySkiPass [validFrom=" + validFrom + ", activateDate="
+				+ activateDate + ", validUntil=" + validUntil + "]";
+	}
+	
+	
 }

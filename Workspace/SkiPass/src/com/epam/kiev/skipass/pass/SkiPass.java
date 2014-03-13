@@ -1,6 +1,8 @@
 package com.epam.kiev.skipass.pass;
 
-public interface SkiPass {
+import java.io.Serializable;
+
+public interface SkiPass extends Serializable{
 	
 	boolean lift();
 }

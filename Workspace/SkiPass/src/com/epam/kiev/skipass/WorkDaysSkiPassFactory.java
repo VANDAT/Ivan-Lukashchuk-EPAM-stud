@@ -29,5 +29,7 @@ public class WorkDaysSkiPassFactory implements SkiPassFactory{
 		default:
 			return null;
 		}		
-	}		
+	}
+	
+	
 }
