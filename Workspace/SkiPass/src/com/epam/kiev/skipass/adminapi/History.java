@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.epam.kiev.skipass.factories.cards.SeasonSkiPass;
 import com.epam.kiev.skipass.factories.cards.SkiPass;
 
 public class History {
@@ -13,12 +14,8 @@ public class History {
 
 	private Class<? extends SkiPass> clazz;
 
-	static {
-		countLiftsMap.put(null, new AtomicLong(0));
-		countDeniedLiftsMap.put(null, new AtomicLong(0));
-	}
-
 	public History(Class<? extends SkiPass> clazz) {
+		this.clazz = clazz;
 		countLiftsMap.put(clazz, new AtomicLong(0));
 		countDeniedLiftsMap.put(clazz, new AtomicLong(0));
 	}
@@ -26,10 +23,8 @@ public class History {
 	public void count(boolean isValid) {
 		if (isValid) {
 			countLiftsMap.get(clazz).incrementAndGet();
-			countLiftsMap.get(null).incrementAndGet();
 		} else {
 			countDeniedLiftsMap.get(clazz).incrementAndGet();
-			countDeniedLiftsMap.get(null).incrementAndGet();
 		}
 	}
 
@@ -39,5 +34,47 @@ public class History {
 
 	public static long getCountDeniedLifts(Class<? extends SkiPass> clazz) {
 		return countDeniedLiftsMap.get(clazz).get();
+	}
+
+	public static String viewCountLifts() {
+		long sum = getSumOfCount(countLiftsMap);
+		try {
+			sum += countLiftsMap.get(SeasonSkiPass.class).get();
+		} catch (NullPointerException e) {
+		}
+		return "Count of lifts = " + sum / 2;
+	}
+
+	public static String viewCountDeniedLifts() {
+		return "Count of denied lifts = " + getSumOfCount(countDeniedLiftsMap);
+	}
+
+	private static long getSumOfCount(
+			Map<Class<? extends SkiPass>, AtomicLong> countMap) {
+		long sum = 0;
+		for (Class<? extends SkiPass> clazz : countMap.keySet()) {
+			sum += countMap.get(clazz).get();
+		}
+		return sum;
+	}
+
+	public static String viewCountLiftsByTypes() {
+		return "Count of lifts by types:{ \n" + viewCountByType(countLiftsMap)
+				+ "}";
+	}
+
+	private static String viewCountByType(
+			Map<Class<? extends SkiPass>, AtomicLong> countMap) {
+		StringBuilder sb = new StringBuilder();
+		for (Class<? extends SkiPass> clazz : countMap.keySet()) {
+			sb.append(clazz.getSimpleName()).append(" = ")
+					.append(countMap.get(clazz).get()).append("\n");
+		}
+		return sb.toString();
+	}
+
+	public static String viewCountDeniedLiftsByTypes() {
+		return "Count of denied lifts by types:{\n "
+				+ viewCountByType(countDeniedLiftsMap) + "}";
 	}
 }

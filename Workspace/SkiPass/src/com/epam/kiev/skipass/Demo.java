@@ -13,10 +13,10 @@ public class Demo {
 		SkiPass skiPass = admin.letOut10LiftsWorkDaysSkiPass();
 		byte[] skiPassBytes = turnstile.writeOnCard(skiPass);
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i < 14; i++) {
 			skiPass = turnstile.readFromCard(skiPassBytes);
 			System.out.println(skiPass.lift());
 			skiPassBytes = turnstile.writeOnCard(skiPass);
-		}
+		}		
 	}
 }

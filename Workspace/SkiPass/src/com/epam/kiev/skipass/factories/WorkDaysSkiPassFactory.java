@@ -6,17 +6,19 @@ import com.epam.kiev.skipass.factories.cards.EveningSkiPass;
 import com.epam.kiev.skipass.factories.cards.MorningSkiPass;
 import com.epam.kiev.skipass.factories.cards.SkiPass;
 import com.epam.kiev.skipass.factories.cards.weekdays.WorkDaysWrapper;
+import com.epam.kiev.skipass.factories.enums.CountableSkiPassTypes;
+import com.epam.kiev.skipass.factories.enums.DaysSkiPassTypes;
 
 public class WorkDaysSkiPassFactory implements SkiPassFactory{
 	
 	@Override
-	public SkiPass letOutCountSkiPass(int numberOfLifts) {		
-		return new WorkDaysWrapper(new CountableSkiPass(numberOfLifts));
+	public SkiPass letOutCountSkiPass(CountableSkiPassTypes type) {		
+		return new WorkDaysWrapper(new CountableSkiPass(type.getValue()));
 	}
 
 	@Override
-	public SkiPass letOutDaysSkiPass(int numberOfDays) {		
-		return new WorkDaysWrapper(new DaysSkiPass(numberOfDays));
+	public SkiPass letOutDaysSkiPass(DaysSkiPassTypes type) {		
+		return new WorkDaysWrapper(new DaysSkiPass(type.getValue()));
 	}
 
 	@Override

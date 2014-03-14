@@ -23,9 +23,9 @@ public abstract class WeekDaysWrup extends AbstractSkiPass {
 	public boolean lift() {
 		boolean isValid = super.lift();
 		if (isValid) {
-			skiPass.lift();
+			return skiPass.lift();
 		}
-		return isValid;
+		return false;
 	}
 
 	protected boolean isWorkDay() {

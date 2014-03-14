@@ -22,4 +22,6 @@ public class WeekendWrapper extends WeekDaysWrup{
 	protected void historyCount(boolean isValid) {
 		history.count(isValid);
 	}
+	
+	
 }

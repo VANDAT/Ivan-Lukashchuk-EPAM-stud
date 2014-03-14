@@ -1,7 +1,6 @@
 package com.epam.kiev.skipass.factories.cards.weekdays;
 
 import com.epam.kiev.skipass.adminapi.History;
-import com.epam.kiev.skipass.factories.cards.EveningSkiPass;
 import com.epam.kiev.skipass.factories.cards.SkiPass;
 
 public class WorkDaysWrapper extends WeekDaysWrup {
