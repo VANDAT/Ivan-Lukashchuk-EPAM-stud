@@ -12,14 +12,14 @@ public class Main {
 	
 	public static void main(String[] args) {	
 		final Bank bank = new Bank();
-		for (int i = 0; i < 10; i++) {
-			bank.getAccounts().add(new Account(rand(), i));
+		for (int i = 0; i < 1000; i++) {
+			bank.getAccounts().add(new Account(rand()));
 		}
 		System.out.println(bank);
 		System.out.println(bank.getAmountOfMoney() + " $$$");
 		ExecutorService service = Executors.newCachedThreadPool();
 		long l = System.currentTimeMillis();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 10000; i++){
 			service.submit(new Runnable() {				
 				@Override
 				public void run() {
@@ -29,16 +29,14 @@ public class Main {
 		}
 		service.shutdown();		
 		try {
-			service.awaitTermination(1, TimeUnit.SECONDS);
+			service.awaitTermination(10, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		bank.transfer(bank.getAccounts().get(1), bank.getAccounts().get(2), 133);
-		System.out.println(bank.getAccounts().get(1) + " asdf");
-		
+				
 		System.out.println(bank.getAmountOfMoney() + " $$$");
 		System.out.println(System.currentTimeMillis() - l + " ms");
 		System.out.println(bank);
+		
 	}
 }

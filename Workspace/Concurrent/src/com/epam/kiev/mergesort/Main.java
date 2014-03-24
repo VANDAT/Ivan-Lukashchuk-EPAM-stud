@@ -12,8 +12,8 @@ public class Main {
 		long l = System.currentTimeMillis();
 		int[] q = new Mergesort().sort(ai, (ExecutorService) null, 0);
 		System.out.println(System.currentTimeMillis() - l + " ms");
-		// for(int x:q){
-		// System.out.println(x);
-		// }
+//		 for(int x:q){
+//		 System.out.println(x);
+//		 }
 	}
 }

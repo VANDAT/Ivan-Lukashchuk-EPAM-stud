@@ -5,20 +5,21 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Account {
 
-	private int id;
 	private Lock lock = new ReentrantLock();
 	private int balance;
 
-	public Account(int ballance, int id) {
+	public Account(int ballance) {
 		if (ballance < 0) {
 			throw new IllegalArgumentException();
 		}
 		this.balance = ballance;
-		this.id = id;
 
 	}
 
 	public void withdraw(int amount) {
+		if (balance < amount) {
+			throw new IllegalArgumentException();
+		}
 		balance -= amount;
 	}
 
@@ -40,6 +41,6 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return id + " " + balance + "$";
+		return balance + "$";
 	}
 }
