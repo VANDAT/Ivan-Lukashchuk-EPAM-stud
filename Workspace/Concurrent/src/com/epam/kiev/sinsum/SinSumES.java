@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
 
 public class SinSumES {
 
-	static volatile double sum;
+	static double sum;
 
 	public double sinSum(final int n, final int numberOfThreads) {
 		if (n < 0) {

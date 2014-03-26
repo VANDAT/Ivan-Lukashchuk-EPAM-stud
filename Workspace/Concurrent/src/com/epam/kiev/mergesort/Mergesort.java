@@ -1,16 +1,18 @@
 package com.epam.kiev.mergesort;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
 public class Mergesort {
 
-	public int[] sort(int[] a, ExecutorService service, int numberOfThreads) {
+	public int[] sort(int[] a, final ExecutorService service) {
 		if (a.length == 1) {
 			return a;
 		}
 		int middle = a.length / 2;
-		int[] left = new int[middle];
-		int[] right = new int[a.length - middle];
+		final int[] left = new int[middle];
+		final int[] right = new int[a.length - middle];
 
 		for (int i = 0; i < a.length; i++) {
 			if (i < middle) {
@@ -19,9 +21,22 @@ public class Mergesort {
 				right[i - middle] = a[i];
 			}
 		}
-
-		return merge(sort(left, service, numberOfThreads / 2),
-				sort(right, service, numberOfThreads / 2));
+		int[] sortedLeft = null;
+		int[] sortedRight = sort(right, service);
+		try {
+			sortedLeft = service.submit(new Callable<int[]>() {
+				@Override
+				public int[] call() throws Exception {				
+					return sort(left, service);
+				}
+			}).get();			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}		
+		return merge(sortedLeft,
+				sortedRight);
 	}
 
 	private int[] merge(int[] left, int[] right) {
