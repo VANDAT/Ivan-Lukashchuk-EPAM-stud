@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>#{texts.Conversations}</title>
+	<style>
+body {
+	font-size:
+}
+</style>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<p:tabView>
+				<p:tab title="#{texts.Conversations}">
+
+					<p:dataTable id="table" var="conversation"
+						value="#{conversationBean.showConversations()}">
+
+						<p:column headerText="#{texts.Title_1}">
+
+							<h:outputText value="#{conversationBean.showTitle(conversation)}"
+								rendered="#{conversationBean.isRead(conversation)}" />
+
+							<h:panelGroup
+								rendered="#{!conversationBean.isRead(conversation)}">
+								<b> <h:outputText
+										value="#{conversationBean.showTitle(conversation)}" />
+								</b>
+							</h:panelGroup>
+						</p:column>
+
+
+						<p:column headerText="#{texts.Last_update}">
+
+							<h:outputText style="font-size: 12px"
+								value="#{conversation.date}"
+								rendered="#{conversationBean.isRead(conversation)}" />
+
+							<h:panelGroup
+								rendered="#{!conversationBean.isRead(conversation)}">
+								<b> <h:outputText style="font-size: 12px"
+										value="#{conversation.date}" />
+								</b>
+							</h:panelGroup>
+						</p:column>
+
+						<p:column headerText="#{texts.Action}">
+							<p:commandButton
+								action="#{conversationBean.showConversation(conversation)}"
+								value="#{texts.Show}">
+							</p:commandButton>
+						</p:column>
+
+					</p:dataTable>
+				</p:tab>
+
+				<p:tab title="#{texts.New_conversation}">
+
+					<p:pickList id="plist" value="#{conversationBean.users}" var="user"
+						effect="bounce" itemValue="#{user}" itemLabel="#{user.name}"
+						converter="#{userConvertor}" showSourceControls="true"
+						showTargetControls="true" showCheckbox="true"
+						showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" style="width:400px">
+
+						<f:facet name="sourceCaption">Friends</f:facet>
+						<f:facet name="targetCaption">Recipients</f:facet>
+
+						<p:column style="width:25%">
+							<p:graphicImage
+								value="/Servlet?path=#{user.avatarPath}&amp;height=40&amp;width=40" />
+						</p:column>
+
+						<p:column style="width:75%;">  
+            #{user.name}  #{user.surname}    
+       			 </p:column>
+					</p:pickList>
+
+					<h:outputText value="#{texts.Title}" />
+					<p:inputText id="t" value="#{conversationBean.conversation.title}"></p:inputText>
+					<br />
+					<p:inputTextarea id="ita" rows="4" cols="48"
+						value="#{conversationBean.message.message}" />
+					<br />
+					<p:commandButton
+						actionListener="#{conversationBean.createConversation()}"
+						value="#{texts.Send_message}" update="table, ita, growl, t" />
+					<p:growl id="growl" showDetail="true" />
+				</p:tab>
+			</p:tabView>
+		</ui:component>
+	</h:form>
+</body>
+</html>

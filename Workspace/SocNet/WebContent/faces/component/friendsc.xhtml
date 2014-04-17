@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Friends}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+
+			<p:tabView>
+				<p:tab id="a" title="#{texts.Friends}">
+					<p:dataTable id="table" var="friend"
+						value="#{friendsBean.getFriends()}">
+
+						<p:column headerText="#{texts.Name_1}">
+							<p:commandLink action="#{searchBean.selectedUser(friend)}">
+								<p:graphicImage
+									value="/Servlet?path=#{friend.avatarPath}&amp;height=150&amp;width=150" />
+								<h:outputText value="    #{friend.name}  " />
+								<h:outputText value="#{friend.surname}" />
+							</p:commandLink>
+						</p:column>
+
+						<p:column headerText="#{texts.Action}" width="250">
+							<p:growl id="growl" showDetail="true" />
+
+							<p:commandButton
+								actionListener="#{messageBean.viewMessage(friend)}"
+								value="#{texts.Send_a_message}">
+								<p:ajax event="dialogReturn" listener="#{messageBean.onSend}"
+									update="growl" />
+							</p:commandButton>
+
+							<p:commandButton update="@all"
+								actionListener="#{friendsBean.remove(friend)}"
+								value="#{texts.Remove_from_friends}">
+								<p:confirm header="Confirmation" message="Are you sure?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Yes" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="No" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+
+						</p:column>
+					</p:dataTable>
+				</p:tab>
+
+				<p:tab id="b" title="#{texts.Invitations_To_Friends}">
+					<p:dataTable id="table1" var="friend"
+						value="#{friendsBean.getInvitationsToFriends()}">
+
+						<p:column headerText="#{texts.Name_1}">
+							<p:commandLink action="#{searchBean.selectedUser(friend.user)}">
+								<p:graphicImage
+									value="/Servlet?path=#{friend.user.avatarPath}&amp;height=150&amp;width=150" />
+								<h:outputText value=" #{friend.user.name} " />
+								<h:outputText value=" #{friend.user.surname}" />
+							</p:commandLink>
+						</p:column>
+
+						<p:column headerText="#{texts.Action}" width="250">
+							<p:commandButton action="#{friendsBean.confirm(friend)}"
+								value="#{texts.Add_to_friends}" onclick="growl" />
+
+							<p:growl id="growl" showDetail="true" />
+
+							<p:commandButton
+								actionListener="#{messageBean.viewMessage(friend.user)}"
+								value="#{texts.Send_a_message}">
+								<p:ajax event="dialogReturn" listener="#{messageBean.onSend}"
+									update="growl" />
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+				</p:tab>
+			</p:tabView>
+
+		</ui:component>
+	</h:form>
+</body>
+</html>

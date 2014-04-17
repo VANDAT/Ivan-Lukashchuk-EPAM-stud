@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Search}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<p:panel header="#{texts.Search}">
+
+				<p:dataTable id="table" var="user" value="#{searchBean.dataModel}"
+					paginator="true" rows="10" rowsPerPageTemplate="5,10,25,50"
+					lazy="true" rendered="#{searchBean.name != null}">
+
+					<p:column headerText="#{texts.Name_1}">
+
+						<p:commandLink action="#{searchBean.selectedUser(user)}">
+
+							<p:graphicImage
+								value="/Servlet?path=#{user.avatarPath}&amp;height=150&amp;width=150" />
+
+							<h:outputText style="margin:auto" value="   #{user.name} " />
+							<h:outputText value="#{user.surname} " />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="#{texts.Action}" width="180">
+
+						<p:growl id="growl" showDetail="true" />
+
+						<p:commandButton actionListener="#{messageBean.viewMessage(user)}"
+							value="#{texts.Send_a_message} " icon="ui-icon-comment"
+							rendered="#{!sessionBean.mySession.user.equals(user)}">
+							<p:ajax event="dialogReturn" listener="#{messageBean.onSend}"
+								update="growl" />
+						</p:commandButton>
+						<p:commandButton action="#{searchBean.addToFriends(user)}"
+							icon="ui-icon-plus" value="#{texts.Add_to_friends}"
+							update="table ,growl" rendered="#{!searchBean.isFriend(user)}" />
+
+					</p:column>
+
+					<p:column width="100"
+						rendered="#{mySession.request.isUserInRole('admin')}">
+						<h:panelGroup id="button">
+							<p:commandButton action="#{adminBean.lockUser(user)}"
+								value="Lock" update="button"
+								rendered="#{user.active and !loginBean.mySession.user.equals(user)}" />
+							<p:commandButton action="#{adminBean.unlockUser(user)}"
+								value="Unlock" update="button" rendered="#{!user.active}" />
+						</h:panelGroup>
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</ui:component>
+	</h:form>
+</body>
+</html>

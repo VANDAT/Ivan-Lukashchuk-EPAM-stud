@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<p:layoutUnit id="northMenuu" position="north" style="height:200px" size="200">
+				<p:toolbar id="tb">
+					<p:toolbarGroup align="left">
+						<b><h:outputText value="#{texts.Welcome}#{sessionBean.mySession.user.name}" style="font-size: 24px;" /></b>
+					</p:toolbarGroup>
+
+					<p:toolbarGroup align="right">
+
+						<p:inputText id="name" value="#{searchBean.name}" />
+						<p:commandButton action="#{searchBean.search()}" value="#{texts.Search}"
+							onclick="table" icon="ui-icon-search" partialSubmit="true" />
+
+						<p:separator />
+
+						<p:menuButton value="#{sessionBean.mySession.locale}">
+							<p:menuitem value="English" update="@all" partialSubmit="true"
+								action="#{sessionBean.mySession.changeLocale('en')}" />
+							<p:menuitem value="Русский" update="@all" partialSubmit="true"
+								action="#{sessionBean.mySession.changeLocale('ru')}" />
+						</p:menuButton>
+
+						<p:commandButton value="#{texts.Logout}" icon="ui-icon-extlink"
+							action="#{loginBean.logout()}" />
+					</p:toolbarGroup>
+				</p:toolbar>
+			</p:layoutUnit>
+		</ui:component>
+	</h:form>
+</body>
+</html>

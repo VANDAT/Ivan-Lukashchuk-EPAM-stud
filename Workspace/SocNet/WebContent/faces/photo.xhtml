@@ -1,0 +1,10 @@
+<ui:composition template="template-dialog.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:param name="title" value="#{texts.Photo}" />
+	<ui:define name="content">
+		<ui:include src="/faces/component/photoc.xhtml">
+			<ui:param name="photoPath" value="#{loginBean.mySession.photo.path}" />
+		</ui:include>
+	</ui:define>
+</ui:composition>

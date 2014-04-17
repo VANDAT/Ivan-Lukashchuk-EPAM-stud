@@ -1,0 +1,15 @@
+26.11.2013 12:26:00 : The XADisk instance has encoutered a critial issue and could not be booted. Such a condition is very rare. If you think you have setup everything right for XADisk to work, please consider discussing in XADisk forums, or raising a bug with details.
+
+org.xadisk.filesystem.exceptions.XASystemBootFailureException: The XADisk instance has encoutered a critial issue and could not be booted. Such a condition is very rare. If you think you have setup everything right for XADisk to work, please consider discussing in XADisk forums, or raising a bug with details.
+	at org.xadisk.filesystem.NativeXAFileSystem.<init>(NativeXAFileSystem.java:192)
+	at org.xadisk.filesystem.NativeXAFileSystem.bootXAFileSystemStandAlone(NativeXAFileSystem.java:224)
+	at org.xadisk.bridge.proxies.interfaces.XAFileSystemProxy.bootNativeXAFileSystem(XAFileSystemProxy.java:47)
+	at com.bionic.socnet.ejb.xadisk.MyIO.main(MyIO.java:31)
+Caused by: java.io.IOException: The i/o operation could not be completed for the file/directory with path [D:\My\Work\SocNet\SocNetPhotos\deadletter\letter_0] due to an unknown reason.
+	at org.xadisk.filesystem.utilities.FileIOUtility.doGCBeforeRetry(FileIOUtility.java:143)
+	at org.xadisk.filesystem.utilities.FileIOUtility.deleteFile(FileIOUtility.java:62)
+	at org.xadisk.filesystem.DurableDiskSession.deleteFile(DurableDiskSession.java:148)
+	at org.xadisk.connector.inbound.DeadLetterMessageEndpoint.<init>(DeadLetterMessageEndpoint.java:40)
+	at org.xadisk.filesystem.NativeXAFileSystem.<init>(NativeXAFileSystem.java:149)
+	... 3 more
+

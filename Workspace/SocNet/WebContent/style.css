@@ -1,0 +1,14 @@
+
+html {
+	height: 98%;
+}
+
+body {
+	height: 100%;
+	background-image: url("images/back.jpg");
+}
+
+ul.ui-menu-child {
+	white-space: nowrap;
+	width: 50px !important;
+}

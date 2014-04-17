@@ -1,0 +1,9 @@
+<ui:composition template="template-dialog.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:param name="title" value="#{texts.New_album}" />
+	<ui:define name="header">
+	</ui:define>
+	<ui:define name="content">
+		<ui:include src="/faces/component/add-albumc.xhtml" />
+	</ui:define>
+</ui:composition>

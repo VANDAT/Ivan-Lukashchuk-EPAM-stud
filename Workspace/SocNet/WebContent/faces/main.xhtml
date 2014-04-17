@@ -1,0 +1,10 @@
+<ui:composition template="template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:param name="title" value="#{texts.Main}" />
+
+	<ui:define name="content">
+		<ui:include src="/faces/component/mainc.xhtml">
+			<ui:param name="user" value="#{loginBean.user}" />
+		</ui:include>
+	</ui:define>
+</ui:composition>

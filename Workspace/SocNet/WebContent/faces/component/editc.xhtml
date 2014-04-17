@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Main}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+				
+					<h:panelGrid columns="3">
+						<h:outputLabel for="namee" value="#{texts.Name}"
+							style="font-weight:bold" />
+						<p:inputText id="namee" value="#{loginBean.mySession.user.name}"
+							required="true" maxlength="45" size="50"
+							requiredMessage="#{texts.This_field_must_be_filled}"
+							validatorMessage="#{texts.Name_must_be_no_more_than_45_characters}">
+							<f:validateLength maximum="45" />
+							<p:clientValidator />
+						</p:inputText>
+						<p:message id="mn" for="namee" />
+
+						<h:outputLabel for="surnamee" value="#{texts.Surname}"
+							style="font-weight:bold" />
+						<p:inputText id="surnamee"
+							value="#{loginBean.mySession.user.surname}"
+							validatorMessage="#{texts.Name_must_be_no_more_than_45_characters}"
+							maxlength="45" size="50">
+							<f:validateLength maximum="45" />
+							<p:clientValidator />
+						</p:inputText>
+						<p:message id="ms" for="surnamee" />
+
+						<h:outputLabel value="#{texts.Birthday}" style="font-weight:bold" />
+						<p:calendar value="#{loginBean.mySession.user.birthday}"
+							yearRange="c-30:c+30" minHour="1900" maxHour="2013" size="50"
+							pattern="dd/MM/yyyy" navigator="true" id="cal" />
+						<br />
+
+						<h:outputLabel for="avatare" value="#{texts.Avatar}"
+							style="font-weight:bold" />
+						<p:fileUpload id="avatare"
+							fileUploadListener="#{loginBean.mySession.handleFileUpload}"
+							mode="advanced" dragDropSupport="false" update="messagese"
+							sizeLimit="10000000" fileLimit="1"
+							allowTypes="/(\.|\/)(gif|jpe?g|png|bmp|jpg|JPG)$/" />
+
+						<p:growl id="messagese" showDetail="true" />
+					</h:panelGrid>
+
+					<p:commandButton action="#{loginBean.mySession.editProfile()}"
+						value="Edit"/>
+			
+		</ui:component>
+	</h:form>
+</body>
+</html>

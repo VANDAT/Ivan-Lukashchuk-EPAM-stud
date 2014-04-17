@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>#{texts.Registration}</title>
+	<style>
+body {
+	background-image: url("./images/back.jpg");
+}
+</style>
+</h:head>
+<body>
+	<h:form>
+		<p:layout style="width:1000px; height:450px;margin:0 auto">
+			<p:layoutUnit position="center">
+				<!-- <p:messages id="mes" /> -->
+				<p:panel id="panel" header="#{texts.Registration}"
+					style="border: 0px">
+					<h:panelGrid columns="3">
+
+						<h:outputLabel for="login" value="#{texts.Login_1}"
+							style="font-weight:bold" />
+						<p:inputText label="Login" id="login" maxlength="45" size="50"
+							value="#{registrationBean.user.principale.login}" required="true"
+							validator="#{registrationBean.loginCheck}"
+							requiredMessage="#{texts.This_field_must_be_filled}">
+						</p:inputText>
+						<p:message id="ml" for="login" />
+
+						<h:outputLabel for="password" value="#{texts.Password}"
+							style="font-weight:bold" />
+						<p:password label="Password" id="password" maxlength="45"
+							size="50" value="#{registrationBean.user.principale.password}"
+							required="true" feedback="true"
+							requiredMessage="#{texts.This_field_must_be_filled}"
+							validatorMessage="#{texts.Password_must_be_at_least_4_characters_and_no_more_than_45}">
+							<f:validateLength minimum="4" maximum="45" />
+							<p:clientValidator />
+						</p:password>
+						<p:message id="mp" for="password" />
+
+						<h:outputLabel for="email" value="#{texts.email}"
+							style="font-weight:bold" />
+						<p:inputText label="email" id="email" size="50"
+							requiredMessage="#{texts.This_field_must_be_filled}"
+							value="#{registrationBean.user.email}" required="true"
+							validatorMessage="#{texts.email_must_be_valid}">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							<p:clientValidator />
+						</p:inputText>
+						<p:message id="me" for="email" />
+
+						<h:outputLabel for="name" value="#{texts.Name}"
+							style="font-weight:bold" />
+						<p:inputText id="name" value="#{registrationBean.user.name}"
+							required="true" maxlength="45" size="50"
+							requiredMessage="#{texts.This_field_must_be_filled}"
+							validatorMessage="#{texts.Name_must_be_no_more_than_45_characters}">
+							<f:validateLength maximum="45" />
+							<p:clientValidator />
+						</p:inputText>
+						<p:message id="mn" for="name" />
+
+						<h:outputLabel for="surname" value="#{texts.Surname}"
+							style="font-weight:bold" />
+						<p:inputText id="surname" value="#{registrationBean.user.surname}"
+							maxlength="45" size="50"
+							validatorMessage="#{texts.Name_must_be_no_more_than_45_characters}">
+							<f:validateLength maximum="45" />
+							<p:clientValidator />
+						</p:inputText>
+						<p:message id="ms" for="surname" />
+
+						<h:outputLabel for="birthday" value="#{texts.Birthday}"
+							style="font-weight:bold" />
+						<p:calendar value="#{registrationBean.user.birthday}" size="50"
+							yearRange="c-30:c+30" minHour="1900" maxHour="2013"
+							pattern="dd/MM/yyyy" navigator="true" id="cal" />
+							
+						<!-- <p:inputMask label="Birthday" mask="99/99/9999" id="birthday"
+							value="#{registrationBean.user.birthday}" size="50"
+							validatorMessage="#{texts.Birsday_must_be_valid_dd_MM_yyyy}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<p:clientValidator />
+						</p:inputMask>
+						<p:message id="mb" for="birthday" /> -->
+
+						<h:outputLabel for="avatar" value="#{texts.Avatar}"
+							style="font-weight:bold" />
+						<p:fileUpload id="avatar"
+							fileUploadListener="#{registrationBean.handleFileUpload}"
+							size="50" mode="advanced" dragDropSupport="false"
+							update="messages" sizeLimit="10000000" fileLimit="1"
+							allowTypes="/(\.|\/)(gif|jpe?g|bmp|jpg|JPG)$/" />
+
+						<p:growl id="messages" showDetail="true" />
+
+						<p:commandButton id="but" icon="ui-icon-plus"
+							action="#{registrationBean.registration()}"
+							value="#{texts.Registration}" update="ml, mp, me, mn, ms" />
+						<p:button value="#{texts.Login}" outcome="login"
+							icon="ui-icon-key" />
+
+					</h:panelGrid>
+				</p:panel>
+			</p:layoutUnit>
+		</p:layout>
+	</h:form>
+</body>
+</html>

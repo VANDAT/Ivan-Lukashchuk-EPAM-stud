@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+body {
+	
+}
+</style>
+</h:head>
+
+<body>
+	<h:form>
+		<ui:component>
+			<p:layoutUnit position="west">
+				<p:menu style="border: 0px; width: 185px">
+					<p:menuitem value="#{texts.My_page}" icon="ui-icon-home"
+						outcome="main" />
+					<p:menuitem
+						value="#{texts.My_messages} #{sessionBean.mySession.showCountUnreadConversations()}"
+						icon="ui-icon-comment" outcome="conversation"
+						styleClass="ui-icon-comment" />
+					<p:menuitem
+						value="#{texts.My_friends} #{sessionBean.mySession.showCountNewFriends()}"
+						icon="ui-icon-person" outcome="friends" />
+					<p:menuitem value="#{texts.My_photos}" icon="ui-icon-image"
+						outcome="albums" />
+					<p:menuitem value=" #{texts.Search}" icon="ui-icon-search"
+						outcome="search" />
+					<p:menuitem value="#{texts.Edit}" icon="ui-icon-search"
+						outcome="edit" />
+				</p:menu>
+			</p:layoutUnit>
+		</ui:component>
+	</h:form>
+</body>
+</html>

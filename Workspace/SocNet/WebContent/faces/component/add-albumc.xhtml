@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Message}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<h:outputText
+				value="#{texts.Title}"
+				style="font-weight:bold" />
+			<br />
+			<p:inputText value="#{albumBean.title}" />
+			<br />
+			<br />
+			<h:outputText
+				value="#{texts.Description}"
+				style="font-weight:bold" />
+			<br />
+			<p:inputTextarea rows="5" cols="30" value="#{albumBean.description}" />
+			<br />
+			<br />
+			<p:commandButton actionListener="#{albumBean.addAlbum()}"
+				value="#{texts.Add_album}" />
+		</ui:component>
+	</h:form>
+</body>
+</html>

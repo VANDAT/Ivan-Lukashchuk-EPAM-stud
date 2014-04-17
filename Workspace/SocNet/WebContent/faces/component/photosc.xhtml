@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Photos}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+
+			<p:panel id="pan" header="#{texts.Add_photo}"
+				rendered="#{albumBean.mySession.album.user.equals(loginBean.mySession.user)}">
+				<p:fileUpload id="ph"
+					fileUploadListener="#{albumBean.handleFileUpload}" mode="advanced"
+					dragDropSupport="false" multiple="true" update="photos, messages"
+					sizeLimit="10000000" fileLimit="20"
+					allowTypes="/(\.|\/)(gif|jpe?g|bmp|jpg|JPG)$/" />
+
+				<p:growl id="messages" showDetail="true" />
+			</p:panel>
+			<h:outputText
+				value="#{texts.Title_2} #{albumBean.mySession.album.title}" />
+			<br />
+			<h:outputText
+				value="#{texts.Descroption} #{albumBean.mySession.album.description}" />
+			<br />
+			<br />
+
+			<p:dataGrid id="photos" var="photo" value="#{albumBean.findPhotos()}"
+				columns="5" rows="15" paginator="true"
+				rowsPerPageTemplate="15,30,60">
+
+				<p:commandLink actionListener="#{albumBean.showPhoto(photo)}"
+					ignoreAutoUpdate="true">
+					<p:graphicImage id="photoImage"
+						value="/Servlet?path=#{photo.path}&amp;height=100&amp;width=150" />
+				</p:commandLink>
+			</p:dataGrid>
+
+		</ui:component>
+	</h:form>
+</body>
+</html>

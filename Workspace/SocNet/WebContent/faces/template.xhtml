@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<title>#{title}</title>
+	<style type="text/css">
+html {
+	height: 98%;
+}
+
+body {
+	height: 100%;
+	background-image: url("./images/back.jpg");
+}
+
+#searchColumn {
+	width: 180px;
+	border: none;
+}
+</style>
+</h:head>
+<body>
+
+	<p:layout id="pageLayout"
+		style=" width:1000px; height: 100%; margin:0 auto ">
+		<h:form id="prodForm">
+			<ui:insert name="header">
+				<ui:include src="/faces/component/header.xhtml" />
+			</ui:insert>
+
+			<ui:insert name="menu">
+				<ui:include src="/faces/component/menu/menu.xhtml" />
+			</ui:insert>
+
+			<p:layoutUnit id="layoutCenter" position="center">
+				<ui:insert name="content" />
+			</p:layoutUnit>
+		</h:form>
+	</p:layout>
+
+</body>
+</html>

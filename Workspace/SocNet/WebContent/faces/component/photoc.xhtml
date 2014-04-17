@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>#{texts.Photos}</title>
+	<style>
+</style>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<p:layout fullPage="true" id="layoutPhoto">
+				<p:layoutUnit id="chat" position="center" style="text-align:center;">
+					<p:commandLink update="@all" actionListener="#{conversationBean.clear()}"
+						action="#{albumBean.showNextPhoto(albumBean.mySession.photo)}"
+						partialSubmit="true">
+						<p:graphicImage alt=""
+							value="/Servlet?path=#{photoPath}&amp;height=300&amp;width=500" />
+					</p:commandLink>
+					<br />
+
+					<p:rating value="#{albumBean.rating}" cancel="false" stars="10">
+						<p:ajax event="rate" listener="#{albumBean.onRate()}"
+							update="@this, growl" />
+					</p:rating>
+					<p:growl id="growl" showDetail="false" />
+
+					<p:commandButton action="#{conversationBean.showMoreMessages()}"
+						value="#{texts.Show_more}" update="table" />
+
+					<p:dataTable id="table" var="message"
+						value="#{conversationBean.showMessages()}">
+
+						<p:column>
+							<p:graphicImage
+								value="/Servlet?path=#{message.user.avatarPath}&amp;height=40&amp;width=40" />
+							<h:outputText value="   #{message.user.name}" />
+						</p:column>
+
+						<p:column width="350">
+							<h:outputText value="#{message.message}" />
+						</p:column>
+
+						<p:column width="120">
+							<h:outputText value="#{message.date}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:layoutUnit>
+
+				<p:layoutUnit position="south" size="130" style="border: 0px">
+					<p:panelGrid columns="2" style="border: 0;">
+						<p:inputTextarea id="ita" rows="3" cols="39"
+							value="#{messageBean.message}" />
+						<p:commandButton
+							actionListener="#{messageBean.sendMessage(messageBean.message)}"
+							value="#{texts.Send_message}" update="table, ita"/>
+					</p:panelGrid>
+				</p:layoutUnit>
+			</p:layout>
+
+		</ui:component>
+	</h:form>
+</body>
+</html>

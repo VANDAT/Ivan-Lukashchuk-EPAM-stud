@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<body>
+	<h:form>
+		<ui:component>
+			<p:toolbar id="tb" >
+				<p:toolbarGroup align="left">
+					<p:button value="#{texts.Main}" icon="ui-icon-home"
+						outcome="main" />
+					<p:button value="#{texts.Messages}" icon="ui-icon-comment"
+						outcome="conversation" />
+					<p:button value="#{texts.Friends}" icon="ui-icon-person" outcome="friends" />
+					<p:button value="#{texts.Photos}" icon="ui-icon-image"
+						outcome="albums" />
+					<p:button value="#{texts.Search}" icon="ui-icon-search"
+						outcome="search" />
+
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<b><h:outputText value="#{texts.Welcome}#{loginBean.login} " /></b>
+
+					<p:separator />
+
+					<p:menuButton value="#{mySession.locale}">
+						<p:menuitem value="English" update="@all"
+							action="#{mySession.changeLocale('en')}" />
+						<p:menuitem value="Русский" update="@all"
+							action="#{mySession.changeLocale('ru')}" />
+
+					</p:menuButton>
+
+					<p:commandButton value="#{texts.Logout}" icon="ui-icon-extlink"
+						action="#{loginBean.logout()}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</ui:component>
+	</h:form>
+</body>
+</html>

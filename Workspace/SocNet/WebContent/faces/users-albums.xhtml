@@ -1,0 +1,9 @@
+<ui:composition template="template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:param name="title" value="#{texts.Photos}" />
+	<ui:define name="content">
+		<ui:include src="/faces/component/albumsc.xhtml">
+			<ui:param name="user" value="#{sessionBean.mySession.selectedUser}" />
+		</ui:include>
+	</ui:define>
+</ui:composition>

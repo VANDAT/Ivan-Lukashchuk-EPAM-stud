@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{searchBean.selectedUser.name}'s page</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+		
+			<p:tabView id="tab">
+				<p:tab title="#{searchBean.selectedUser.name}">
+					<p:graphicImage
+						value="/Servlet?path=#{searchBean.selectedUser.avatarPath}&amp;height=225&amp;width=225"/>
+					<h:panelGrid columns="2">
+
+						<h:outputLabel for="name" value="#{texts.Name}"
+							style="font-weight:bold" />
+						<h:outputLabel id="name" value="#{searchBean.selectedUser.name}"
+							style="font-weight:bold" />
+
+						<h:outputLabel for="surename" value="#{texts.Surename}"
+							style="font-weight:bold" />
+						<h:outputLabel id="surename"
+							value="#{searchBean.selectedUser.surname}"
+							style="font-weight:bold" />
+
+						<h:outputLabel for="birthday" value="#{texts.Birthday}"
+							style="font-weight:bold" />
+						<h:outputLabel id="birthday"
+							value="#{searchBean.selectedUser.birthday}"
+							style="font-weight:bold" />
+					</h:panelGrid>
+					
+				</p:tab>
+				
+				<p:tab title="#{texts.Photos}">
+				
+					<p:dataTable id="table" var="album"
+						value="#{albumBean.findAlbums(searchBean.selectedUser)}">
+
+						<p:column headerText="#{texts.Title_1}">
+							<h:outputText value="#{album.title}" />
+						</p:column>
+
+						<p:column headerText="#{texts.Last_update}">
+							<h:outputText value="#{album.date}" />
+						</p:column>
+
+						<p:column headerText="#{texts.Action}">
+							<p:commandButton action="#{albumBean.setAlbum(album)}"
+								value="#{texts.Show}" update="@all"  >
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>	
+					
+					<h:panelGroup rendered="#{albumBean.album != null}">
+							<br />
+							<h:outputText 
+								value="#{texts.Title_2} #{albumBean.album.title}" />
+							<br />
+							<h:outputText 
+								value="#{texts.Descroption} #{albumBean.album.description}" />
+							<br />
+							<br />
+							<p:dataGrid var="photo" value="#{albumBean.showPhotos()}"
+								columns="5" rows="15" paginator="true"
+								rowsPerPageTemplate="15,30,60" >
+								<p:commandLink actionListener="#{albumBean.showPhoto(photo)}"
+									ignoreAutoUpdate="true">
+									<p:graphicImage id="photoImage"
+										value="/Servlet?path=#{photo.path}&amp;height=100&amp;width=140"/>
+								</p:commandLink>
+							</p:dataGrid>
+						</h:panelGroup>				
+				</p:tab>
+			</p:tabView>
+
+		</ui:component>
+	</h:form>
+</body>
+</html>

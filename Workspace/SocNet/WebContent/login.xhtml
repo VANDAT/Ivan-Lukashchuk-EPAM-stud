@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Login}</title>
+	<style>
+body {
+	background-image: url("images/back.jpg");
+}
+</style>
+</h:head>
+<body>
+	<p:layout style="width:450px; height:300px; top: 150px; margin:0 auto;">
+		<p:layoutUnit position="center">
+			<p:panel header="#{texts.Login}" style="border: 0px">
+				<p:messages id="messages" autoUpdate="true" />
+				<h:form>
+
+					<h:panelGrid columns="2" cellpadding="7">
+						<h:outputLabel for="login" value="#{texts.Login_1}"
+							style="font-weight:bold" />
+						<p:inputText id="login" value="#{loginBean.login}" />
+						<h:outputLabel for="password" value="#{texts.Password}"
+							style="font-weight:bold" />
+						<p:inputText type="password" id="password"
+							value="#{loginBean.password}" />
+						<p:commandButton action="#{loginBean.signIn()}"
+							value="#{texts.Sign_In}" icon="ui-icon-key" />
+						<p:button value="#{texts.Registration}" outcome="registration"
+							icon="ui-icon-plus" />
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</p:layoutUnit>
+	</p:layout>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Main}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+
+			<p:layout id="mainLayput" style="height:100%; border:0px">
+				<p:layoutUnit position="west" id="ph" size="270"
+					style="text-align:center;">
+					<p:layout id="mainLayputm" style="height:100% border:0px">
+
+						<p:layoutUnit position="north" size="250" style="border:0px">
+							<p:graphicImage id="img" style="margin:auto"
+								value="/Servlet?path=#{user.avatarPath}&amp;height=225&amp;width=225" />
+						</p:layoutUnit>
+						<p:layoutUnit position="center" style="border:0px">
+
+							<p:growl id="growl" showDetail="true" />
+
+							<p:commandButton
+								actionListener="#{messageBean.viewMessage(user)}"
+								rendered="#{!loginBean.mySession.user.equals(user)}"
+								value="#{texts.Send_a_message}" icon="ui-icon-comment">
+								<p:ajax event="dialogReturn" listener="#{messageBean.onSend}"
+									update="growl" />
+							</p:commandButton>
+							<p:commandButton action="#{searchBean.addToFriends(user)}"
+								icon="ui-icon-plus" value="   #{texts.Add_to_friends}   "
+								update="@this ,growl" rendered="#{!searchBean.isFriend(user)}" />
+
+							<p:commandButton partialSubmit="true" icon="ui-icon-image"
+								action="#{albumBean.showAlbums(user)}" value="#{texts.Photos}" />
+
+							<p:panel id="panelFriends" header="#{texts.Friends}">
+
+								<p:dataGrid var="friend"
+									value="#{friendsBean.showFriends(user)}" columns="3" rows="6"
+									style="border:0px"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="9,12,15">
+
+									<p:commandLink action="#{searchBean.selectedUser(friend)}">
+										<p:graphicImage id="img"
+											value="/Servlet?path=#{friend.avatarPath}&amp;height=55&amp;width=55" /><br/>
+										<h:outputText value="#{friend.name}"
+											style="text-align:center;" />
+									</p:commandLink>
+								</p:dataGrid>
+							</p:panel>
+
+						</p:layoutUnit>
+					</p:layout>
+				</p:layoutUnit>
+
+				<p:layoutUnit position="center" id="cen"
+					style="height:100%; border:0px">
+					<p:layout>
+						<p:layoutUnit position="north" size="130">
+							<h:panelGrid columns="2">
+								<h:outputLabel for="name1" value="#{texts.Name}"
+									style="font-weight:bold" />
+								<h:outputLabel id="name1" value="#{user.name}"
+									style="font-weight:bold" />
+
+								<h:outputLabel for="surename" value="#{texts.Surename}"
+									style="font-weight:bold" />
+								<h:outputLabel id="surename" value="#{user.surname}"
+									style="font-weight:bold" />
+
+								<h:outputLabel for="birthday" value="#{texts.Birthday}"
+									style="font-weight:bold" />
+								<h:outputLabel id="birthday" value="#{user.birthday}"
+									style="font-weight:bold" />
+							</h:panelGrid>
+						</p:layoutUnit>
+
+						<p:layoutUnit position="center">
+							<p:commandButton action="#{conversationBean.showMoreMessages()}"
+								value="#{texts.Show_more}" update="table" />
+
+							<p:dataTable id="table" var="message"
+								value="#{conversationBean.showMessages(user)}">
+
+								<p:column>
+									<p:graphicImage
+										value="/Servlet?path=#{message.user.avatarPath}&amp;height=40&amp;width=40" />
+									<h:outputText value="   #{message.user.name}" />
+								</p:column>
+
+								<p:column width="350">
+									<h:outputText value="#{message.message}" />
+								</p:column>
+
+								<p:column width="120">
+									<h:outputText value="#{message.date}" />
+								</p:column>
+
+							</p:dataTable>
+						</p:layoutUnit>
+
+						<p:layoutUnit position="south" size="110" style="border: 0px"
+							rendered="#{sessionBean.mySession.user.equals(user)}">
+							<p:panelGrid columns="2" style="border: 0;">
+								<p:inputTextarea id="ita" rows="3" cols="25"
+									value="#{messageBean.message}" />
+								<p:commandButton
+									actionListener="#{messageBean.sendMessage(messageBean.message)}"
+									value="#{texts.Send_message}" update="table, ita" />
+							</p:panelGrid>
+						</p:layoutUnit>
+					</p:layout>
+				</p:layoutUnit>
+			</p:layout>
+		</ui:component>
+	</h:form>
+</body>
+</html>

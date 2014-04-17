@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{texts.Message}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+
+			<p:panel header="#{texts.Message_to}">
+
+				<p:graphicImage
+					value="/Servlet?path=#{messageBean.mySession.userTo.avatarPath}&amp;height=40&amp;width=40" />
+				<h:outputText value="  " />
+				<h:outputText value="  #{messageBean.mySession.userTo.name}" />
+				<h:outputText value="  " />
+				<h:outputText value="#{messageBean.mySession.userTo.surname}" />
+				<h:outputText value="    " />
+			</p:panel>
+			<p:inputTextarea rows="5" cols="33" value="#{messageBean.message}" />
+			<br />
+			<p:commandButton actionListener="#{messageBean.sendMessage()}"
+				value="#{texts.Send_message}" />
+
+		</ui:component>
+	</h:form>
+</body>
+</html>

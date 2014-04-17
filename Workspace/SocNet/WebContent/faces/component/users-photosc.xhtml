@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>#{searchBean.selectedUser.name}'s #{texts.Albums}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+		
+
+			<p:dataTable id="table" var="album"
+				value="#{albumBean.findAlbums(searchBean.selectedUser)}">
+
+				<p:column headerText="#{texts.Title_1}">
+					<h:outputText value="#{album.title}" />
+				</p:column>
+
+				<p:column headerText="#{texts.Last_update}">
+					<h:outputText value="#{conversation.date}" />
+				</p:column>
+
+				<p:column headerText="#{texts.Action}">
+					<p:commandButton action="#{albumBean.setAlbum(album)}"
+						value="#{texts.Show}" update=":photos">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<h:panelGroup id="photos">
+				<h:panelGroup rendered="#{albumBean.album != null}">
+					<br />
+					<h:outputText
+						value="#{texts.Title_2} #{albumBean.mySession.album.title}" />
+					<br />
+					<h:outputText
+						value="#{texts.Descroption} #{albumBean.mySession.album.description}" />
+					<br />
+					<br />
+					<p:dataGrid var="photo" value="#{albumBean.findPhotos()}"
+						columns="5" rows="10" paginator="true"
+						rowsPerPageTemplate="5,10,15">
+
+						<p:commandLink actionListener="#{albumBean.showPhoto(photo)}"
+							ignoreAutoUpdate="true">
+							<p:graphicImage id="photoImage"
+								value="/Servlet?path=#{photo.path}" height="100" width="150" />
+						</p:commandLink>
+					</p:dataGrid>
+				</h:panelGroup>
+			</h:panelGroup>
+		</ui:component>
+	</h:form>
+</body>
+</html>

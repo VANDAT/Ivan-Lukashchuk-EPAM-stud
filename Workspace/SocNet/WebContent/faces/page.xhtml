@@ -1,0 +1,9 @@
+<ui:composition template="template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:param name="title" value="#{searchBean.selectedUser.name}'s page" />
+	<ui:define name="content">
+		<ui:include src="/faces/component/mainc.xhtml">
+			<ui:param name="user" value="#{searchBean.selectedUser}" />
+		</ui:include>
+	</ui:define>
+</ui:composition>

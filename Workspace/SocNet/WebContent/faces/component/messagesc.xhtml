@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<title>#{texts.Messages}</title>
+</h:head>
+<body>
+	<h:form>
+		<ui:component>
+			<script type="text/javascript">
+            window.onload = function(){
+                document.getElementById('prodForm:center').scrollTop = -9999;
+           }
+        </script>
+			<p:layout style=" width:95%; height:100%; margin:0 auto "
+				id="layoutMess">
+
+				<p:layoutUnit position="north" minSize="130">
+					<p:panel header="#{texts.Conversation_with}">
+						<c:forEach items="#{conversationBean.getRecipients()}" var="user">
+							<p:commandLink action="#{searchBean.selectedUser(user)}">
+								<p:graphicImage
+									value="/Servlet?path=#{user.avatarPath}&amp;height=40&amp;width=40" />
+								<h:outputText value="  " />
+								<h:outputText value="  #{user.name}" />
+								<h:outputText value="  " />
+								<h:outputText value="#{user.surname}" />
+								<h:outputText value="    " />
+							</p:commandLink>
+						</c:forEach>
+					</p:panel>
+				</p:layoutUnit>
+
+				<p:layoutUnit id="center" position="center">
+					<p:commandButton action="#{conversationBean.showMoreMessages()}"
+						value="#{texts.Show_more}" update="table" />
+
+
+					<p:dataTable id="table" var="message"
+						value="#{conversationBean.showMessages()}">
+
+						<p:column>
+							<p:commandLink action="#{searchBean.selectedUser(message.user)}">
+								<p:graphicImage
+									value="/Servlet?path=#{message.user.avatarPath}&amp;height=40&amp;width=40" />
+								<h:outputText value="   #{message.user.name}" />
+							</p:commandLink>
+						</p:column>
+
+						<p:column width="1000">
+							<h:outputText value="#{message.message}" />
+						</p:column>
+
+						<p:column width="120">
+							<h:outputText value="#{message.date}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:layoutUnit>
+
+					
+				<a4j:push id="consumer" address="qwe@pushCdi"
+					onerror="alert(event.rf.data)" ondataavailable="location.reload();" />
+
+
+				<p:layoutUnit position="south" size="130" style="border: 0px">
+					<p:inputTextarea id="ita" rows="4" cols="45"
+						value="#{messageBean.message}" />
+					<p:commandButton onclick="location.r"
+						actionListener="#{messageBean.sendMessage(messageBean.message)}"
+						value="#{texts.Send_message}" update="table, ita" />
+
+				</p:layoutUnit>
+			</p:layout>
+
+		</ui:component>
+	</h:form>
+</body>
+</html>
