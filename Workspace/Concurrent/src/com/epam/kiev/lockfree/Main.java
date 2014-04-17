@@ -11,15 +11,16 @@ public class Main {
 
 			@Override
 			public Object call() throws Exception {
+				for(int i = 0; i < 10 ;i++){
 				System.out.println(lockFree.next());
+				}
 				return null;
 			}
 		};
 		ExecutorService service = Executors.newCachedThreadPool();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 4; i++) {
 			service.submit(callable);
 		}
 		service.shutdown();
-
 	}
 }

@@ -27,39 +27,39 @@ public class NCCircularBuffer<T> implements CircularBuffer<T> {
 		if (item == null) {
 			throw new IllegalArgumentException();
 		}
-		if (writeNode.item != null) {
-			try {
-				synchronized (writeNode) {
+		synchronized (writeNode) {
+			if (writeNode.item != null) {
+				try {
 					writeNode.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
-		}
-		writeNode.item = item;
-		writeNode = writeNode.next;
-		synchronized (readNode) {
-			readNode.notify();
+			writeNode.item = item;
+			writeNode = writeNode.next;
+			synchronized (readNode) {
+				readNode.notify();
+			}
 		}
 	}
 
 	public T read() {
-		T item = readNode.item;
-		if (item == null) {
-			try {
-				synchronized (readNode) {
+		synchronized (readNode) {
+			T item = readNode.item;
+			if (item == null) {
+				try {
 					readNode.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				item = readNode.item;
 			}
-			item = readNode.item;
+			readNode.item = null;
+			readNode = readNode.next;
+			synchronized (writeNode) {
+				writeNode.notify();
+			}
+			return item;
 		}
-		readNode.item = null;
-		readNode = readNode.next;
-		synchronized (writeNode) {
-			writeNode.notify();
-		}
-		return item;
 	}
 }

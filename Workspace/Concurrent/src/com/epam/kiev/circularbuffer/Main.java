@@ -2,7 +2,7 @@ package com.epam.kiev.circularbuffer;
 
 public class Main {
 	public static void main(String[] args) {
-		final CircularBuffer<Integer> buffer = new CCircularBuffer<>(3);
+		final CircularBuffer<Integer> buffer = new NCCircularBuffer<>(3);
 		new Thread(){
 			public void run() {
 			buffer.write(5);

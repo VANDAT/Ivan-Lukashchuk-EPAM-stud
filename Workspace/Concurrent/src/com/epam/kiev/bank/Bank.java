@@ -19,7 +19,7 @@ public class Bank {
 
 	public void transfer(Account from, Account to, int amount) {
 		try {
-			if (from.getLock().tryLock(10, TimeUnit.MILLISECONDS)) {
+			if (from.getLock().tryLock(12, TimeUnit.MILLISECONDS)) {
 				try {
 					if (to.getLock().tryLock(10, TimeUnit.MILLISECONDS)) {
 						try {
@@ -28,10 +28,15 @@ public class Bank {
 						} finally {
 							to.getLock().unlock();
 						}
+					}else{
+						from.getLock().unlock();
+						transfer(from, to, amount);
 					}
 				} finally {
 					from.getLock().unlock();
 				}
+			}else{
+				transfer(from, to, amount);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class SinSumVJ {
 
-	static volatile double sum;
+	static double sum;
 
 	public double sinSum(final int n, final int numberOfThreads) {
 		if (n < 0) {
