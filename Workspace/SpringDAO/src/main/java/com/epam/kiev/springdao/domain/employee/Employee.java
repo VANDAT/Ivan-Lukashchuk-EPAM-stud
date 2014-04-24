@@ -26,6 +26,19 @@ public class Employee {
 	public void setJob(Job job) {
 		this.job = job;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Employee [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", job=");
+		builder.append(job);
+		builder.append("]");
+		return builder.toString();
+	}
 	 
 	 
 }

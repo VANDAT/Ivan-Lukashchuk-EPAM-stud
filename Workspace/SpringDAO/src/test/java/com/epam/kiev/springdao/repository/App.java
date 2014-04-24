@@ -13,9 +13,8 @@ public class App {
 				EmployeeRepository.class);
 	Employee employee = new Employee();
 	employee.setName("asd");
-	employeeRepository.create(employee);
+	System.out.println(employeeRepository.create(employee));
+	System.out.println(employeeRepository.findAll());
 	System.out.println(1);
-
 	}
-
 }

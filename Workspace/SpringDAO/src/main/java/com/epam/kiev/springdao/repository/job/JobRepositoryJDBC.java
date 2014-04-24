@@ -24,14 +24,14 @@ public class JobRepositoryJDBC implements JobRepository {
 	@Override
 	public Job find(Integer id) {
 		return jdbcTemplate.queryForObject(
-				"SELECT * FORM Job WHERE id=?", new Object[] { id },
+				"SELECT * FROM Job WHERE id=?", new Object[] { id },
 				jobRowMapper);
 	}
 
 	@Override
 	public List<Job> findAll() {
 		return jdbcTemplate
-				.query("SELECT * FORM Job", jobRowMapper);
+				.query("SELECT * FROM Job", jobRowMapper);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class JobRepositoryJDBC implements JobRepository {
 	@Override
 	public Job findByName(String name) {
 		return jdbcTemplate.queryForObject(
-				"SELECT * FORM Job WHERE name=?",
+				"SELECT * FROM Job WHERE name=?",
 				new Object[] { name }, jobRowMapper);
 	}
 

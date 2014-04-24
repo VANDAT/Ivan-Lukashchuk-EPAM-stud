@@ -25,14 +25,14 @@ public class EmployeeRepositoryJDBC implements EmployeeRepository {
 	@Override
 	public Employee find(Integer id) {
 		return jdbcTemplate.queryForObject(
-				"SELECT * FORM Employee WHERE id=?", new Object[] { id },
+				"SELECT * FROM Employee WHERE id=?", new Object[] { id },
 				employeeRowMapper);
 	}
 
 	@Override
 	public List<Employee> findAll() {
 		return jdbcTemplate
-				.query("SELECT * FORM Employee", employeeRowMapper);
+				.query("SELECT * FROM Employee", employeeRowMapper);
 	}
 
 	@Override
@@ -49,13 +49,13 @@ public class EmployeeRepositoryJDBC implements EmployeeRepository {
 	@Override
 	public Employee findByName(String name) {
 		return jdbcTemplate.queryForObject(
-				"SELECT * FORM Employee WHERE name=?",
+				"SELECT * FROM Employee WHERE name=?",
 				new Object[] { name }, employeeRowMapper);
 	}
 
 	@Override
 	public List<Employee> findByJob(Job job) {
-		return jdbcTemplate.query("SELECT * FORM Employee WHERE job_id=?",
+		return jdbcTemplate.query("SELECT * FROM Employee WHERE job_id=?",
 				new Object[] { job.getId() }, employeeRowMapper);
 	}
 

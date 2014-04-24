@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS Employee(
+CREATE TABLE Employee(
     id IDENTITY,
     name varchar(30),
   	job_id int
 );
 
-CREATE TABLE IF NOT EXISTS Job(
+CREATE TABLE Job(
     id IDENTITY,
     name varchar(30)
 );
