@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.properties" />
+		<property qualifier="Organization.name"/>			
+		<property qualifier="Organization.phoneNumber" />
+	</group>
+
+</editor>

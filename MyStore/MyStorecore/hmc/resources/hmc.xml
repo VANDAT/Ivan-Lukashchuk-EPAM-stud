@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns="hybris.de/schemas/hmc/generic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+	<explorertree>
+		<group name="organizationgroup">
+			<typeref type="Organization" />
+		</group>
+		<group name="User" mode="append">
+			<typeref type="MyStoreCustomer" />
+		</group>
+	</explorertree>
+
+	<type name="Organization" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="id" />
+				<condition attribute="name" />
+				<condition attribute="email" />
+				<condition attribute="phoneNumber" />
+				<condition attribute="customers" />
+			</search>
+			<result>
+				<listview mode="replace">
+					<itemlayout>
+						<attribute name="id" />
+						<attribute name="name" />
+						<attribute name="email" />
+						<attribute name="phoneNumber" />
+						<attribute name="customers" />
+					</itemlayout>
+				</listview>
+			</result>
+			<editor>
+				<essentials>
+					<listlayout>
+						<attribute name="id" />
+					</listlayout>
+				</essentials>
+				<tab name="tab.organization">
+					<section name="section.organization">
+						<listlayout>
+							<attribute name="id" />
+							<attribute name="name" />
+							<attribute name="email" />
+							<attribute name="phoneNumber" />
+							<attribute name="customers" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+
+	<type name="MyStoreCustomer" mode="append">
+		<organizer>
+			<search mode="replace">
+				<condition attribute="uid" />
+				<condition attribute="name" />
+				<condition attribute="status" />
+				<condition attribute="attemptCount" />
+				<condition attribute="organizations" />
+			</search>
+
+			<result>
+				<listview mode="replace">
+					<itemlayout>
+						<attribute name="uid" />
+						<attribute name="name" />
+						<attribute name="status" />
+						<attribute name="attemptCount" />
+						<attribute name="organizations" />
+					</itemlayout>
+				</listview>
+			</result>
+
+			<editor>
+				<essentials>
+					<listlayout>
+						<attribute name="status" />
+						<attribute name="attemptCount" />
+					</listlayout>
+				</essentials>
+				<tab name="tab.organizations">
+					<section name="section.organizations">
+						<listlayout>
+							<attribute name="organizations" />
+						</listlayout>
+					</section>
+				</tab>
+			</editor>
+		</organizer>
+	</type>
+</configuration>

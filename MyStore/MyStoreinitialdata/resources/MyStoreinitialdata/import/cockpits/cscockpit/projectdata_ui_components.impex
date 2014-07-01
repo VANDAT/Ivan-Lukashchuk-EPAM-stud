@@ -1,0 +1,4 @@
+
+INSERT_UPDATE CockpitUIConfigurationMedia;code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+
+;customer_EditCustomerDetails_cockpitgroup_ui_config;text/xml;Customer_EditCustomerDetails_CockpitGroup.xml;jar:de.hybris.platform.cscockpit.jalo.CscockpitManager&/MyStorecockpits/cscockpit/import/config/Customer_EditCustomerDetails_CockpitGroup.xml

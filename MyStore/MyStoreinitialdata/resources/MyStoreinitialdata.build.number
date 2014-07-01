@@ -1,0 +1,9 @@
+#Ant properties
+#Mon Mar 10 15:06:15 CET 2014
+builddate=20140310 1505
+description=MyStoreinitialdata
+name=MyStoreinitialdata
+releasedate=20140222 2238
+vendor=hybris
+version=5.1.1.0
+version.api=5.1.1

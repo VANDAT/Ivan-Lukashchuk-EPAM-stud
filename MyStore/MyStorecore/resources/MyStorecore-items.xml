@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. This software is the confidential and proprietary information 
+	of hybris ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in accordance with 
+	the terms of the license agreement you entered into with hybris. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+	</collectiontypes>
+
+	<enumtypes>
+		<enumtype code="SiteChannel" generate="false" autocreate="false" dynamic="false">
+			<description>This enumeration denotes the channel for the BaseSite - B2B, B2C, or Telco</description>
+			<value code="Telco" />
+		</enumtype>
+	</enumtypes>
+
+	<relations>
+
+		<relation localized="false" code="MyStoreCustomer2Organization" generate="true" autocreate="true">
+			<deployment table="MSCustomer2Organization" typecode="10126" />
+			<sourceElement qualifier="customers" type="MyStoreCustomer" cardinality="many" collectiontype="list">
+			<modifiers read="true" write="true" search="true"/>			
+			</sourceElement>
+			<targetElement qualifier="organizations" type="Organization" cardinality="many" collectiontype="list">
+				<modifiers  read="true" write="true" search="true" optional="false"/>
+			</targetElement>
+		</relation>
+
+		<relation code="ProductAccessoryComponent2ClassAttributeAssignRel" generate="true" localized="false" autocreate="true">
+			<description>This relation links productref and class component with one or more classification attributes  for this component.</description>
+			<sourceElement qualifier="productReferencesAndClassificationsComponents" type="ProductReferencesAndClassificationsComponent"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="classAttributeAssignment" type="ClassAttributeAssignment" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+		<relation code="ProductReferencesAndClassificationsComponent2TargetItemTypeRel" generate="true" localized="false"
+			autocreate="true">
+			<description>This relation links product accessory component with one or more target products for this component.</description>
+			<sourceElement qualifier="productReferencesAndClassificationsComponents" type="ProductReferencesAndClassificationsComponent"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="targetItemType" type="ComposedType" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
+
+	</relations>
+
+	<itemtypes>
+		<!-- Add your item definitions here -->
+
+		<itemtype code="MyStoreCustomer" generate="true" autocreate="true" extends="Customer">
+			<!-- <deployment table="MyStoreCustomer" typecode="10124" /> -->
+			<attributes>
+				<attribute type="java.lang.Boolean" qualifier="status">
+				<defaultvalue>false</defaultvalue>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" />
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="attemptCount">
+				<defaultvalue>0</defaultvalue>
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="Organization" generate="true" autocreate="true">
+		<!-- 	<deployment table="Organization" typecode="10125" /> -->
+			<attributes>
+				<attribute type="java.lang.Integer" qualifier="id">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				</attribute>
+				<attribute type="localized:java.lang.String" qualifier="name">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="phoneNumber">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" />
+				</attribute>
+				<attribute type="java.lang.String" qualifier="email">
+					<persistence type="property" />
+					<modifiers read="true" write="true" search="true" optional="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+
+		<!-- TypeGroups are for structure of this file only -->
+		<typegroup name="Telco">
+			<itemtype code="ProductReferencesAndClassificationsComponent" extends="ProductReferencesComponent" autocreate="true"
+				generate="true" jaloclass="com.epam.kiev.mystore.core.jalo.ProductReferencesAndClassificationsComponent">
+				<description>It represents product accessories component, that is a combo of product references and classification features.</description>
+				<attributes>
+				</attributes>
+			</itemtype>
+			<itemtype code="ProductReferencesAndClassificationsForDevicesComponent" extends="ProductReferencesAndClassificationsComponent"
+				autocreate="true" generate="true" jaloclass="com.epam.kiev.mystore.core.jalo.ProductReferencesAndClassificationsForDevicesComponent">
+				<description>It represents devices component, that is a combo of product references and classification features of devices.</description>
+				<attributes>
+				</attributes>
+			</itemtype>
+			<itemtype code="Device" extends="Product" autocreate="true" generate="true" jaloclass="com.epam.kiev.mystore.core.jalo.Device">
+				<attributes>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="Accessory" extends="Product" autocreate="true" generate="true" jaloclass="com.epam.kiev.mystore.core.jalo.Accessory">
+				<attributes>
+					<attribute qualifier="soldIndividually" redeclare="true" type="java.lang.Boolean">
+						<modifiers read="true" write="false" search="true" initial="true" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.valueOf(true)</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ServicePlan" extends="SubscriptionProduct" autocreate="true" generate="true"
+				jaloclass="com.epam.kiev.mystore.core.jalo.ServicePlan">
+				<attributes>
+				</attributes>
+			</itemtype>
+			<itemtype code="ServiceAddOn" extends="SubscriptionProduct" autocreate="true" generate="true"
+				jaloclass="com.epam.kiev.mystore.core.jalo.ServiceAddOn">
+				<attributes>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ClassificationNotBlankConstraint" autocreate="true" generate="true" extends="TypeConstraint"
+				jaloclass="com.epam.kiev.mystore.core.jalo.ClassificationNotBlankConstraint">
+				<description>Custom constraint which checks if the provided classification class is not blank.</description>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="category">
+						<description>Category code</description>
+						<modifiers read="true" write="true" search="true" optional="false" initial="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="classification">
+						<description>Classification class code</description>
+						<modifiers read="true" write="true" search="true" optional="false" initial="false" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="annotation" type="java.lang.Class" redeclare="true">
+						<modifiers write="false" initial="true" optional="false" />
+						<defaultvalue>
+	                        com.epam.kiev.mystore.core.constraints.ClassificationNotBlank.class
+	                    </defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+	</itemtypes>
+
+</items>

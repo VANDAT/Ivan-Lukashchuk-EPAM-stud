@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <MyStorestorefront>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.MiniCartComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.DefaultCMSComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.facade.DefaultCheckoutFacadeIntegrationTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.CMSLinkComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.interceptors.i18n.SetLanguageBeforeControllerHandlerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.security.cookie.EnhancedCookieGeneratorTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.CategoryFeatureComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.interceptors.CSRFHandlerInterceptorTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.security.impl.WebHttpSessionRequestCacheUnitTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.ProductCarouselComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.NavigationBarComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.web.view.UiExperienceViewResolverTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.ProductFeatureComponentControllerTest</testclass>
+    <testclass>com.epam.kiev.mystore.storefront.controllers.cms.ProductReferencesComponentControllerTest</testclass>
+  </MyStorestorefront>
+</testclasses>

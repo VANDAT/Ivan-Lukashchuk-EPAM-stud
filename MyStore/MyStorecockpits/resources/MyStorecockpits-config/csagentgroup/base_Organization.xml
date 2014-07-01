@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+    <search>
+        <search-properties>
+            <property qualifier="Organization.id" />
+        </search-properties>
+        <sort-properties>
+            <property qualifier="Organization.id" />
+            <property qualifier="Organization.name" />
+        </sort-properties>
+    </search>
+    <label>
+        <property qualifier="Organization.id"/>
+    </label>
+</base>

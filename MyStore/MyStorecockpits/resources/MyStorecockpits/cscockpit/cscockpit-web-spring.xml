@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+ 
+    <alias alias="cscockpitNavigationArea" name="defaultMyStoreCscockpitNavigationArea" />
+	<bean id="defaultMyStoreCscockpitNavigationArea" class="de.hybris.platform.cscockpit.session.impl.CscockpitNavigationArea"
+		scope="session" parent="BaseNavigationArea">
+		<property name="sectionModel" ref="cscockpitNavigationAreaModel" />
+		<property name="infoSlotRenderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.InfoBoxRenderer" />
+		</property>
+		<property name="sections">
+			<list>
+				<ref bean="csOrganization" />
+				<ref bean="cscockpitNavCallCtxSection" />
+				<ref bean="cscockpitNavHelpSection" />
+			</list>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService" />
+		<property name="modelService" ref="modelService" />
+		<property name="objectCollectionService" ref="objectCollectionService" />
+		<property name="uiComponentCache" ref="uiComponentCache" />
+		<property name="dynamicQueryService" ref="dynamicQueryService" />
+		<property name="uiConfigurationService" ref="uiConfigurationService" />
+		<property name="savedQueryService" ref="savedQueryService" />
+	</bean>
+
+	<alias alias="csOrganization" name="csOrganizationNavigationPaner" />
+	<bean id="csOrganizationNavigationPaner" class="de.hybris.platform.cockpit.components.navigationarea.NavigationPanelSection"
+		scope="prototype">
+		<property name="localizedLabel" value="type.organization.name" />
+		<property name="visible" value="true" />
+		<property name="renderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.TypeSelectorSectionRenderer" autowire="byName">
+				<property name="typeCodes" value="Organization"></property>
+			</bean>
+		</property>
+	</bean>
+ 
+</beans>

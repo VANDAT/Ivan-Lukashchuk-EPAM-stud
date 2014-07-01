@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <MyStorecore>
+    <testclass>com.epam.kiev.mystore.core.services.impl.DefaultCompatibilityServiceIntegrationTest</testclass>
+    <testclass>com.epam.kiev.mystore.core.daos.impl.DefaultProductsFeaturesDaoIntegrationTest</testclass>
+    <testclass>com.epam.kiev.mystore.core.daos.impl.DefaultCustomerDAOImplTest</testclass>
+    <testclass>com.epam.kiev.mystore.core.jalo.synchronization.BundleTemplateSynchronizationIntegrationTest</testclass>
+    <testclass>com.epam.kiev.mystore.core.bundle.impl.DefaultGuidedSellingServiceTest</testclass>
+  </MyStorecore>
+</testclasses>
